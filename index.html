@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lewei Gao</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:    #ffffff;
+      --bg2:   #f4f4f4;
+      --bg3:   #eeeeee;
+      --black: #1c1c1c;
+      --mid:   #767676;
+      --light: #b0b0b0;
+      --font:  "Roboto", sans-serif;
+      --mono:  "Roboto Mono", monospace;
+      --left-w: 360px;
+      --c1: #007FA3; --c2: #DC4633; --c3: #00A189; --c4: #0D534D;
+      --c5: #8DBF2E; --c6: #6D247A; --c7: #AB1368; --c8: #F1C500;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    .left {
+      position: fixed; top: 0; left: 0; bottom: 0;
+      width: var(--left-w);
+      background: var(--bg2);
+      display: flex; flex-direction: column;
+      padding: 52px 44px 40px;
+      overflow-y: auto;
+      z-index: 10;
+    }
+    .left-nav { margin-bottom: 60px; }
+    .left-nav-links { list-style: none; display: flex; gap: 20px; }
+    .left-nav-links a {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid);
+      transition: color 0.12s;
+    }
+    .left-nav-links a:hover { color: var(--black); }
+    .left-name {
+      font-size: 2.6rem; font-weight: 300;
+      line-height: 1.1; letter-spacing: -0.025em;
+      margin-bottom: 6px;
+    }
+    .left-name b { font-weight: 500; }
+    .left-discipline {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 44px;
+    }
+    .left-links { display: flex; flex-direction: column; gap: 2px; margin-bottom: 48px; }
+    .btn-link {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0;
+      color: var(--mid);
+      transition: color 0.15s;
+    }
+    .btn-link:hover { color: var(--black); }
+    .btn-bar {
+      width: 4px; height: 22px;
+      background: #d0d0d0;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .btn-link:nth-child(1):hover .btn-bar { background: var(--c3); }
+    .btn-link:nth-child(2):hover .btn-bar { background: var(--c1); }
+    .btn-link:nth-child(3):hover .btn-bar { background: var(--c8); }
+    .btn-text { font-size: 0.82rem; flex: 1; }
+    .btn-arrow {
+      font-size: 0.75rem; color: var(--light);
+      opacity: 0; transform: translateX(-4px);
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .btn-link:hover .btn-arrow { opacity: 1; transform: translateX(0); }
+
+    .left-bio { font-size: 0.82rem; color: var(--mid); line-height: 1.9; }
+    .left-bio p { margin-bottom: 16px; }
+    .left-bio p:last-child { margin-bottom: 0; }
+    .left-bio a {
+      color: var(--mid);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color 0.12s;
+    }
+    .left-bio a:hover { color: var(--black); }
+
+    .right { margin-left: var(--left-w); flex: 1; padding: 52px 48px 80px; }
+    .section-label {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 32px;
+    }
+    .section-label span {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .section-label .count { color: var(--light); }
+
+    .tags { display: flex; gap: 12px; flex-wrap: wrap; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      transition: color 0.12s;
+    }
+    a.tag:hover { color: var(--black); }
+    .tag-sq {
+      display: inline-block;
+      width: 7px; height: 14px;
+      flex-shrink: 0;
+    }
+
+    .pub-section { background: var(--bg2); padding: 44px; margin-bottom: 72px; }
+    .pub-card {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 48px; align-items: start;
+      cursor: pointer;
+      animation: up 0.5s ease both;
+    }
+    .pub-img-wrap {
+      width: 100%; aspect-ratio: 4 / 3;
+      overflow: hidden; background: var(--bg3);
+    }
+    .pub-img-wrap img {
+      object-fit: contain;
+      background: #fff;
+      padding: 8px;
+      transition: transform 0.45s ease;
+    }
+    .pub-card:hover .pub-img-wrap img { transform: scale(1.02); }
+    .pub-text { display: flex; flex-direction: column; gap: 14px; padding-top: 4px; }
+    .pub-kicker {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c1);
+    }
+    .pub-title { font-size: 1.2rem; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em; }
+    .pub-journal {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--light);
+    }
+    .pub-abstract { font-size: 0.8rem; color: var(--mid); line-height: 1.85; }
+    .pub-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-top: 4px;
+      transition: color 0.15s, gap 0.15s;
+    }
+    .pub-card:hover .pub-cta { color: var(--black); gap: 12px; }
+
+    .row-wide { display: flex; flex-direction: column; gap: 56px; }
+    .card-wide {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 40px; align-items: center;
+      cursor: pointer;
+      animation: up 0.5s ease both;
+    }
+    .card-wide:nth-child(1) { animation-delay: 0.06s; }
+    .card-wide:nth-child(2) { animation-delay: 0.12s; }
+    .card-wide:nth-child(3) { animation-delay: 0.18s; }
+    .card-wide:nth-child(4) { animation-delay: 0.24s; }
+    .card-wide:nth-child(5) { animation-delay: 0.30s; }
+
+    .card-img-wrap {
+      width: 100%; aspect-ratio: 16 / 10;
+      overflow: hidden; background: var(--bg2);
+    }
+    .card-img-wrap img { transition: transform 0.45s ease; }
+    .card-wide:hover .card-img-wrap img { transform: scale(1.03); }
+
+    .card-text { display: flex; flex-direction: column; gap: 12px; }
+    .card-title { font-size: 1.1rem; font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; }
+    .card-desc { font-size: 0.82rem; color: var(--mid); line-height: 1.85; }
+    .card-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--light);
+      transition: color 0.15s, gap 0.15s;
+    }
+    .card-wide:hover .card-link { color: var(--black); gap: 12px; }
+
+    footer { margin-top: 80px; display: flex; justify-content: space-between; align-items: center; }
+    footer p, footer a {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      color: var(--light);
+    }
+    footer a:hover { color: var(--mid); }
+
+    @keyframes up {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 960px) {
+      body { flex-direction: column; }
+      .left { position: relative; width: 100%; padding: 40px 24px 36px; }
+      .right { margin-left: 0; padding: 40px 24px 60px; }
+      .pub-section { padding: 28px; }
+      .pub-card, .card-wide { grid-template-columns: 1fr; gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="left">
+    <div class="left-nav">
+      <ul class="left-nav-links">
+        <li><a href="#pub">Publication</a></li>
+        <li><a href="#works">Works</a></li>
+      </ul>
+    </div>
+
+    <h1 class="left-name">Lewei<br><b>Gao</b></h1>
+    <p class="left-discipline">GIS · Urban Planning · Spatial Analysis</p>
+
+    <div class="left-links">
+      <a class="btn-link" href="mailto:lewei.gao@mail.utoronto.ca">
+        <span class="btn-bar"></span>
+        <span class="btn-text">Email</span>
+        <span class="btn-arrow">↗</span>
+      </a>
+      <a class="btn-link" href="https://www.linkedin.com/in/leweigao/" target="_blank">
+        <span class="btn-bar"></span>
+        <span class="btn-text">LinkedIn</span>
+        <span class="btn-arrow">↗</span>
+      </a>
+      <a class="btn-link" href="/assets/cv.pdf" target="_blank">
+        <span class="btn-bar"></span>
+        <span class="btn-text">Resume / CV</span>
+        <span class="btn-arrow">↓</span>
+      </a>
+    </div>
+
+    <div class="left-bio">
+      <p>I am currently pursuing a Master of Urban Innovation at the University of Toronto, building on my background in Geographic Information Systems (GIS) and Human Geography. My academic and professional interests lie at the intersection of spatial analysis and urban policy, focusing on how humans interact with urban environments and using spatial data and visualization to uncover meaningful insights into the dynamics of cities. Through my research and projects, I aim to contribute to sustainable urban development and the creation of vibrant, inclusive public spaces, where innovative design and data-driven solutions shape the future of urban landscapes.</p>
+      <p>My research on food access and socioeconomic deprivation in Mississauga was published in <a href="https://www.mdpi.com/2413-8851/9/7/265" target="_blank">Urban Science (2025)</a>.</p>
+    </div>
+  </aside>
+
+  <main class="right">
+
+    <!-- PUBLICATION -->
+    <div id="pub" class="section-label">
+      <span>Peer-Reviewed Publication</span>
+    </div>
+
+    <div class="pub-section">
+      <div class="pub-card" onclick="window.open('https://www.mdpi.com/2413-8851/9/7/265','_blank')">
+        <div class="pub-img-wrap">
+          <img src="assets/images/publication.jpg" alt="Food Desert Methodology Diagram">
+        </div>
+        <div class="pub-text">
+          <p class="pub-kicker">Urban Science &nbsp;·&nbsp; 2025</p>
+          <h2 class="pub-title">Identifying Food Deserts in Mississauga: A Comparative Analysis of Socioeconomic Indicators</h2>
+          <p class="pub-journal">Huda, T., Wang, A., Zhang, H., Gao, L., He, Y., &amp; Zhu, T. &nbsp;·&nbsp; Urban Science, 9(7), 265</p>
+          <p class="pub-abstract">A lack of access to healthy food has been a problem for low-income residents in many developed urban areas. This study examines the spatial distribution of food deserts in Mississauga, one of Canada's most populous cities. Network analysis was employed to map geographic inaccessibility to essential nutritious food, defined as residential areas beyond a 15-minute walking distance from grocery stores. Socioeconomic indicators were integrated to identify regions that are socioeconomically disadvantaged and most affected by food inaccessibility. The model developed offers valuable tools for policymakers and urban planners to address food desert issues and improve access to healthy food.</p>
+          <div class="tags">
+            <a class="tag" href="https://www.mdpi.com/search?q=food+deserts" target="_blank" onclick="event.stopPropagation()"><span class="tag-sq" style="background:#0D534D"></span>Food Deserts</a>
+            <a class="tag" href="https://www.mdpi.com/search?q=accessibility" target="_blank" onclick="event.stopPropagation()"><span class="tag-sq" style="background:#00A189"></span>Accessibility</a>
+            <a class="tag" href="https://www.mdpi.com/search?q=spatial+analysis" target="_blank" onclick="event.stopPropagation()"><span class="tag-sq" style="background:#007FA3"></span>Spatial Analysis</a>
+            <a class="tag" href="https://www.mdpi.com/search?q=socioeconomic+indicators" target="_blank" onclick="event.stopPropagation()"><span class="tag-sq" style="background:#AB1368"></span>Socioeconomic Indicators</a>
+          </div>
+          <a class="pub-cta" href="https://www.mdpi.com/2413-8851/9/7/265" target="_blank">View Publication &nbsp;→</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div id="works" class="section-label">
+      <span>Selected Works</span>
+      <span class="count">5 projects</span>
+    </div>
+
+    <div class="row-wide">
+
+      <!-- 1. Good Growth -->
+      <div class="card-wide" onclick="window.open('https://arcg.is/mabOe1','_blank')">
+        <div class="card-img-wrap">
+          <img src="assets/images/good-growth.jpg" alt="What is Good Growth in Toronto">
+        </div>
+        <div class="card-text">
+          <h3 class="card-title">What is "Good Growth" in Toronto?</h3>
+          <p class="card-desc">Toronto is growing fast, and through policies like EHON the city has chosen to grow inward. This capstone project draws on permit data, the zoning reform timeline, and Major Transit Station Areas to trace where and what kind of housing actually gets built, and to ask who that growth is for.</p>
+          <div class="tags">
+            <span class="tag"><span class="tag-sq" style="background:#6D247A"></span>Story Map</span>
+            <span class="tag"><span class="tag-sq" style="background:#F1C500"></span>Housing</span>
+            <span class="tag"><span class="tag-sq" style="background:#0D534D"></span>Urban Policy</span>
+            <span class="tag"><span class="tag-sq" style="background:#8DBF2E"></span>Equity</span>
+            <span class="tag"><span class="tag-sq" style="background:#007FA3"></span>Toronto</span>
+          </div>
+          <span class="card-link">View Project &nbsp;→</span>
+        </div>
+      </div>
+
+      <!-- 2. PanaSea -->
+      <div class="card-wide" onclick="window.open('https://arcg.is/1eyi4O3','_blank')">
+        <div class="card-img-wrap">
+          <img src="assets/images/panasea.gif" alt="Sea Cucumber Farming Sustainability">
+        </div>
+        <div class="card-text">
+          <h3 class="card-title">Sustainability Assessment of Sea Cucumber Farming</h3>
+          <p class="card-desc">An environmental assessment of PanaSea's open-ocean sea cucumber farm in Linton Bay, Panama. On-site water samples are paired with PlanetScope satellite imagery to track chlorophyll and turbidity from 2020 to 2022, comparing hapa-net farming sites with nearby control areas to understand how restorative aquaculture interacts with the surrounding marine environment.</p>
+          <div class="tags">
+            <span class="tag"><span class="tag-sq" style="background:#6D247A"></span>Story Map</span>
+            <span class="tag"><span class="tag-sq" style="background:#00A189"></span>Sustainability Assessment</span>
+            <span class="tag"><span class="tag-sq" style="background:#E07B00"></span>Remote Sensing</span>
+            <span class="tag"><span class="tag-sq" style="background:#0D534D"></span>Aquaculture</span>
+          </div>
+          <span class="card-link">View Project &nbsp;→</span>
+        </div>
+      </div>
+
+      <!-- 3. Food Desert -->
+      <div class="card-wide" onclick="window.open('https://arcg.is/1n5Kan0','_blank')">
+        <div class="card-img-wrap">
+          <img src="assets/images/food-desert.jpg" alt="Food Desert in Mississauga">
+        </div>
+        <div class="card-text">
+          <h3 class="card-title">The Food Desert in Mississauga</h3>
+          <p class="card-desc">A GIS-based investigation of fresh-food access in Mississauga, combining 15-minute walk, drive, and transit network analysis with census data on income and population density. Field-collected price data from ethnic and non-ethnic markets adds another layer, showing how cultural retail networks shape what affordable, healthy food access really looks like.</p>
+          <div class="tags">
+            <span class="tag"><span class="tag-sq" style="background:#6D247A"></span>Story Map</span>
+            <span class="tag"><span class="tag-sq" style="background:#0D534D"></span>Food Desert</span>
+            <span class="tag"><span class="tag-sq" style="background:#00A189"></span>Accessibility</span>
+            <span class="tag"><span class="tag-sq" style="background:#DC4633"></span>Mississauga</span>
+          </div>
+          <span class="card-link">View Project &nbsp;→</span>
+        </div>
+      </div>
+
+      <!-- 4. Subway Map -->
+      <div class="card-wide" onclick="window.location.href='subway-map-shijiazhuang.html'">
+        <div class="card-img-wrap">
+          <img src="assets/images/subway-shijiazhuang.jpg" alt="Shijiazhuang Subway Map">
+        </div>
+        <div class="card-text">
+          <h3 class="card-title">Subway Map: Shijiazhuang, Hebei Province, China</h3>
+          <p class="card-desc">Based on the Shijiazhuang Rail Transit Network Plan (2021–2035).</p>
+          <div class="tags">
+            <span class="tag"><span class="tag-sq" style="background:#DC4633"></span>Subway Map</span>
+            <span class="tag"><span class="tag-sq" style="background:#6D247A"></span>Cartography</span>
+            <span class="tag"><span class="tag-sq" style="background:#F1C500"></span>Adobe Illustrator</span>
+            <span class="tag"><span class="tag-sq" style="background:#00A189"></span>Public Transit</span>
+            <span class="tag"><span class="tag-sq" style="background:#AB1368"></span>Shijiazhuang</span>
+          </div>
+          <span class="card-link">View Project &nbsp;→</span>
+        </div>
+      </div>
+
+      <!-- 5. Crime Analysis -->
+      <div class="card-wide" onclick="window.location.href='spatial-analysis-of-crimes-toronto.html'">
+        <div class="card-img-wrap">
+          <img src="assets/images/crime-toronto.jpg" alt="Spatial Analysis of Crimes in Toronto">
+        </div>
+        <div class="card-text">
+          <h3 class="card-title">Spatial Analysis of Crimes in Toronto</h3>
+          <p class="card-desc">Spatial and temporal distribution of crime by type in Toronto, 2014–2021.</p>
+          <div class="tags">
+            <span class="tag"><span class="tag-sq" style="background:#DC4633"></span>Crime Analysis</span>
+            <span class="tag"><span class="tag-sq" style="background:#0D534D"></span>Spatial and Temporal Distribution</span>
+            <span class="tag"><span class="tag-sq" style="background:#8DBF2E"></span>GWR</span>
+            <span class="tag"><span class="tag-sq" style="background:#007FA3"></span>Toronto</span>
+          </div>
+          <span class="card-link">View Project &nbsp;→</span>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      <p>© 2025 Lewei Gao — Toronto, CA</p>
+      <a href="https://www.linkedin.com/in/leweigao/" target="_blank">linkedin.com/in/leweigao</a>
+    </footer>
+
+  </main>
+</body>
+</html>
