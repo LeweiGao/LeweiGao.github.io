@@ -1,0 +1,431 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  --paper: #f1efe8;
+  --paper-soft: #f7f5ef;
+  --ink: #1f211f;
+  --muted: #706f69;
+  --faint: #9a978e;
+  --line: #d0ccc1;
+  --dark: #1d1e1d;
+  --dark-2: #292a29;
+  --light: #f3f1eb;
+  --light-muted: #c9c6bd;
+  --accent: #5a7883;
+
+  /* Project tag palette, derived from the Ontario Line map colours and extended for future work */
+  --tag-map: #2fa9d6;
+  --tag-built-environment: #a78ab8;
+  --tag-transit: #86b43f;
+  --tag-toronto: #e4512e;
+  --tag-storymap: #e3bd3f;
+  --tag-housing: #567b99;
+  --tag-cartography: #8b6e9f;
+  --tag-shijiazhuang: #b85f52;
+  --tag-food-access: #4f9b79;
+  --tag-gis: #73b8d6;
+  --tag-mississauga: #d88c43;
+  --tag-research: #c1a06a;
+  --tag-spatial-analysis: #6678ae;
+  --tag-remote-sensing: #4f9498;
+  --tag-sustainability: #8f9850;
+  --tag-panama: #d57a92;
+  --tag-crime: #8f5267;
+  --tag-data-storytelling: #476f8d;
+  --tag-policy: #a96f49;
+  --tag-demography: #7a8d5e;
+
+  --sans: "DM Sans", Arial, sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+  --max: 1320px;
+  --text: 720px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+::selection { background: #cdd7d8; color: var(--ink); }
+.container { width: min(calc(100% - 64px), var(--max)); margin: 0 auto; }
+
+.eyebrow,
+.nav-link,
+.footer-copy,
+.meta {
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .11em;
+}
+
+/* Header: intentionally close to the first design */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  font-size: .96rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+.brand-block {
+  width: 11px;
+  height: 28px;
+  background: var(--ink);
+}
+.site-nav { display: flex; align-items: center; gap: 30px; }
+.nav-link {
+  font-size: .63rem;
+  color: var(--muted);
+  transition: color .18s ease;
+}
+.nav-link:hover { color: var(--ink); }
+
+/* Homepage hero: preserve the first version */
+.home-hero {
+  min-height: 590px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(300px, .75fr);
+  gap: 90px;
+  align-items: end;
+  padding: 110px 0 72px;
+}
+.hero-name {
+  font-size: clamp(4.6rem, 9vw, 8.8rem);
+  font-weight: 300;
+  line-height: .86;
+  letter-spacing: -.065em;
+  max-width: 850px;
+}
+.hero-name strong { font-weight: 500; }
+.hero-side { padding-bottom: 8px; }
+.eyebrow { font-size: .62rem; color: var(--muted); margin-bottom: 20px; }
+.hero-statement {
+  font-size: clamp(1.2rem, 2vw, 1.65rem);
+  line-height: 1.45;
+  letter-spacing: -.02em;
+  max-width: 510px;
+}
+.hero-detail {
+  margin-top: 28px;
+  font-size: .9rem;
+  line-height: 1.72;
+  color: var(--muted);
+  max-width: 500px;
+}
+
+/* Selected work */
+.work-section {
+  background: var(--dark);
+  color: var(--light);
+  padding: 86px 0 102px;
+}
+.work-heading { margin-bottom: 48px; max-width: 760px; }
+.work-label {
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .11em;
+  font-size: .63rem;
+  color: #9f9d97;
+  margin-bottom: 14px;
+}
+.work-heading h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -.045em;
+}
+
+.featured-project {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(300px, .7fr);
+  gap: 46px;
+  align-items: center;
+  margin-bottom: 72px;
+}
+.project-media {
+  overflow: hidden;
+  background: #111;
+}
+.project-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s cubic-bezier(.2,.7,.2,1);
+}
+.project-card:hover .project-media img,
+.featured-project:hover .project-media img { transform: scale(1.012); }
+.featured-media { min-height: 510px; }
+.featured-copy { padding-right: 20px; }
+.featured-title {
+  font-size: clamp(2.6rem, 5vw, 5rem);
+  font-weight: 500;
+  line-height: .98;
+  letter-spacing: -.05em;
+  margin-bottom: 20px;
+}
+.project-desc {
+  color: var(--light-muted);
+  line-height: 1.6;
+  font-size: .92rem;
+  max-width: 600px;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 44px;
+  row-gap: 66px;
+}
+.project-card { display: block; }
+.project-card .project-media {
+  aspect-ratio: 16 / 10;
+  background: #111;
+}
+.project-text { padding-top: 22px; }
+.project-title {
+  font-size: 1.58rem;
+  font-weight: 600;
+  letter-spacing: -.025em;
+  line-height: 1.18;
+  margin-bottom: 12px;
+  color: var(--light);
+}
+.project-card .project-desc { font-size: .88rem; }
+
+/* Transit-sign inspired tags: only color on project cards */
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 17px 30px;
+  margin-top: 26px;
+}
+.project-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: .72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .015em;
+  color: var(--light);
+  line-height: 1;
+}
+.project-tag i {
+  display: inline-block;
+  width: 11px;
+  height: 28px;
+  background: var(--tag-color, #8ca4ad);
+  flex: 0 0 auto;
+}
+
+.tag-map { --tag-color: var(--tag-map); }
+.tag-built-environment { --tag-color: var(--tag-built-environment); }
+.tag-transit { --tag-color: var(--tag-transit); }
+.tag-toronto { --tag-color: var(--tag-toronto); }
+.tag-storymap { --tag-color: var(--tag-storymap); }
+.tag-housing { --tag-color: var(--tag-housing); }
+.tag-cartography { --tag-color: var(--tag-cartography); }
+.tag-shijiazhuang { --tag-color: var(--tag-shijiazhuang); }
+.tag-food-access { --tag-color: var(--tag-food-access); }
+.tag-gis { --tag-color: var(--tag-gis); }
+.tag-mississauga { --tag-color: var(--tag-mississauga); }
+.tag-research { --tag-color: var(--tag-research); }
+.tag-spatial-analysis { --tag-color: var(--tag-spatial-analysis); }
+.tag-remote-sensing { --tag-color: var(--tag-remote-sensing); }
+.tag-sustainability { --tag-color: var(--tag-sustainability); }
+.tag-panama { --tag-color: var(--tag-panama); }
+.tag-crime { --tag-color: var(--tag-crime); }
+.tag-data-storytelling { --tag-color: var(--tag-data-storytelling); }
+.tag-policy { --tag-color: var(--tag-policy); }
+.tag-demography { --tag-color: var(--tag-demography); }
+
+/* Footer */
+.site-footer { padding: 30px 0 42px; background: var(--paper); }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.footer-copy { color: var(--faint); font-size: .58rem; }
+
+/* Ontario Line: one typographic system, minimal graphic treatment */
+.project-hero-simple {
+  padding: 94px 0 80px;
+}
+.project-hero-simple-grid {
+  display: block;
+}
+.project-hero-simple h1 {
+  font-size: clamp(4.3rem, 8vw, 8rem);
+  font-weight: 300;
+  line-height: .88;
+  letter-spacing: -.065em;
+}
+.project-hero-simple h2 {
+  margin-top: 20px;
+  font-size: clamp(1.55rem, 3vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -.04em;
+  max-width: none;
+  white-space: nowrap;
+}
+
+.project-section-simple { padding: 76px 0; }
+.project-content { max-width: 1000px; }
+.project-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+.section-bar {
+  display: inline-block;
+  width: 10px;
+  height: 34px;
+  background: var(--accent);
+  flex: 0 0 auto;
+}
+.project-heading h2 {
+  font-size: clamp(2rem, 3.4vw, 3.15rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -.04em;
+}
+.project-copy-simple,
+.project-notes-simple,
+.source-list-simple {
+  width: min(100%, var(--text));
+  margin-left: 26px;
+}
+.project-copy-simple p,
+.project-notes-simple p {
+  font-size: 1rem;
+  line-height: 1.78;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.project-copy-simple p:last-child,
+.project-notes-simple p:last-child { margin-bottom: 0; }
+.project-copy-simple strong,
+.project-notes-simple strong { color: var(--ink); font-weight: 600; }
+
+.project-figure {
+  width: min(calc(100% - 64px), 1180px);
+  margin: 44px auto 0;
+}
+.project-figure-wide { width: min(calc(100% - 64px), 1260px); }
+.project-figure img { width: 100%; height: auto; }
+.project-figure figcaption {
+  margin-top: 12px;
+  color: var(--faint);
+  font-size: .74rem;
+  line-height: 1.6;
+  max-width: 900px;
+}
+.project-notes-section { padding-bottom: 48px; }
+.project-notes-simple p { margin-bottom: 14px; }
+.source-list-simple { margin-top: 38px; }
+.source-list-simple .eyebrow { margin-bottom: 12px; }
+.source-list-simple p {
+  color: var(--muted);
+  font-size: .84rem;
+  line-height: 1.55;
+  margin-bottom: 7px;
+}
+.source-list-simple a { transition: color .18s ease; }
+.source-list-simple a:hover { color: var(--ink); }
+.back-link-wrap { padding: 24px 0 76px; }
+.back-link {
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: .6rem;
+  color: var(--muted);
+}
+.back-link:hover { color: var(--ink); }
+
+/* Legacy project pages */
+.simple-project { padding: 88px 0; }
+.simple-project .project-section-head { margin-bottom: 32px; }
+.project-section-head { display: flex; align-items: center; gap: 16px; }
+.project-section-num { display: inline-block; width: 10px; height: 34px; background: var(--accent); font-size: 0; flex: 0 0 auto; }
+.project-section-title { font-size: clamp(2rem, 3.5vw, 3.25rem); font-weight: 500; line-height: 1.05; letter-spacing: -.04em; }
+.simple-visual { max-width: 1100px; margin: 36px auto 0; background: var(--paper-soft); padding: 0; }
+.simple-visual img { width: 100%; height: auto; }
+.placeholder-box { padding: 34px 0; color: var(--muted); max-width: 760px; }
+
+@media (max-width: 980px) {
+  .container { width: min(calc(100% - 40px), var(--max)); }
+  .home-hero { grid-template-columns: 1fr; min-height: auto; gap: 52px; padding: 78px 0 58px; }
+  .hero-name { font-size: clamp(4.6rem, 17vw, 8rem); }
+  .featured-project { grid-template-columns: 1fr; gap: 28px; }
+  .featured-media { min-height: 0; aspect-ratio: 16/10; }
+  .featured-copy { max-width: 720px; }
+  .work-grid { gap: 52px 28px; }
+  .project-hero-simple-grid { grid-template-columns: 1fr; gap: 40px; }
+  .project-hero-simple h2 { white-space: normal; }
+}
+
+@media (max-width: 700px) {
+  .container { width: min(calc(100% - 28px), var(--max)); }
+  .header-inner { min-height: 58px; }
+  .site-nav { gap: 16px; }
+  .brand { font-size: .86rem; }
+  .brand-block { width: 8px; height: 22px; }
+  .home-hero { padding: 58px 0 48px; }
+  .hero-name { font-size: clamp(4rem, 22vw, 6rem); }
+  .hero-detail { font-size: .86rem; }
+  .work-section { padding: 60px 0 72px; }
+  .work-grid { grid-template-columns: 1fr; row-gap: 50px; }
+  .featured-title { font-size: 2.8rem; }
+  .project-title { font-size: 1.42rem; }
+  .project-tags { gap: 14px 24px; margin-top: 22px; }
+  .project-tag { font-size: .68rem; }
+  .project-tag i { width: 9px; height: 24px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .project-hero-simple { padding: 58px 0 48px; }
+  .project-hero-simple h1 { font-size: clamp(3.8rem, 18vw, 5.4rem); }
+  .project-section-simple { padding: 54px 0; }
+  .project-heading { gap: 12px; margin-bottom: 24px; }
+  .section-bar { width: 8px; height: 28px; }
+  .project-copy-simple,
+  .project-notes-simple,
+  .source-list-simple { margin-left: 0; }
+  .project-figure,
+  .project-figure-wide { width: calc(100% - 28px); }
+}
+
+/* Small compatibility styles for older project pages */
+.project-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+.project-kicker .meta { font-size: .61rem; color: var(--muted); }
+.route-mark { display: inline-block; width: 10px; height: 28px; background: var(--accent); }
+.route-mark.yellow { background: #c49b42; }
+.route-mark.rust { background: #a15e48; }
+.section-intro { color: var(--muted); max-width: 650px; line-height: 1.7; margin-top: 12px; }
+
+.sources-as-copy { margin-top: 0; }
+.sources-as-copy p {
+  font-size: 1rem;
+  line-height: 1.72;
+  color: var(--muted);
+  margin-bottom: 10px;
+}

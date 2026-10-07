@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ontario Line built environment mapping project by Lewei Gao.">
+  <title>Ontario Line | Lewei Gao</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Lewei Gao home">
+          <span class="brand-block"></span>
+          <span>Lewei Gao</span>
+        </a>
+        <nav class="site-nav" aria-label="Contact links">
+          <a class="nav-link" href="mailto:lewei.gao@mail.utoronto.ca">Email</a>
+          <a class="nav-link" href="https://www.linkedin.com/in/leweigao/" target="_blank" rel="noopener">LinkedIn</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="project-hero-simple container">
+        <p class="eyebrow">GIS · Cartography · Toronto · 2026</p>
+        <div class="project-hero-simple-grid">
+          <div>
+            <h1>Ontario Line</h1>
+            <h2>Mapping the Built Environment Around 15 Stations</h2>
+          </div>
+        </div>
+      </section>
+
+      <section class="project-section-simple">
+        <div class="container project-content">
+          <div class="project-heading"><span class="section-bar"></span><h2>Project Overview</h2></div>
+          <div class="project-copy-simple">
+            <p>The Ontario Line is a 15.6 km subway under construction across Toronto, with 15 stations from Exhibition Place to Don Mills Road.</p>
+            <p>I first became curious about the corridor after coming across Ontario Line construction while walking along the Don River trail. It led to a simple question:</p>
+            <p><strong>What already exists around these future stations?</strong></p>
+            <p>I used an 800 m radius around each station to compare two parts of the existing built environment: building use and building height. The maps move between the full corridor and individual station areas, showing how much the urban form changes along the line.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="project-section-simple">
+        <div class="container project-content">
+          <div class="project-heading"><span class="section-bar"></span><h2>The Corridor</h2></div>
+          <div class="project-copy-simple">
+            <p>The Ontario Line runs from Exhibition Place through downtown Toronto and northeast to Don Valley Station. Its 15 stations connect with TTC Lines 1, 2 and 5, streetcar and bus routes, and three GO rail lines.</p>
+          </div>
+        </div>
+        <figure class="project-figure">
+          <img src="assets/images/ontario-line/route-map.png" alt="Ontario Line route and stations map">
+          <figcaption>Route and station locations are approximate and were referenced from Metrolinx and Infrastructure Ontario information.</figcaption>
+        </figure>
+      </section>
+
+      <section class="project-section-simple">
+        <div class="container project-content">
+          <div class="project-heading"><span class="section-bar"></span><h2>Framing the Analysis</h2></div>
+          <div class="project-copy-simple">
+            <p><strong>How does the existing built environment vary across Ontario Line station areas?</strong></p>
+            <p>To make the station areas comparable, I used the same 800 m straight-line radius around each station. Several of these areas overlap, so a building can belong to more than one station area. Station-level results are calculated independently, while corridor totals are deduplicated by building ID.</p>
+            <p>Two measures are looked:</p>
+            <p><strong>Building use</strong> is measured by each category’s share of total building footprint area.</p>
+            <p><strong>Building height</strong> is measured by the distribution of buildings across four height ranges.</p>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="project-section-simple">
+        <div class="container project-content">
+          <div class="project-heading"><span class="section-bar"></span><h2>Data and Method</h2></div>
+          <div class="project-copy-simple">
+            <p><strong>Building use.</strong> OpenStreetMap building polygons provide building footprints and the primary source for use classification. OSM building tags were grouped into the six categories shown in the map legend. For buildings that remained unclassified, City of Toronto Zoning By-law 569-2013 data were used as a secondary source. Zoning describes permitted use and may not match the current use of an individual building.</p>
+            <p><strong>Building height.</strong> City of Toronto 3D Massing data provide building heights. Average height was used where available, with maximum height used when a valid average height was unavailable.</p>
+            <p><strong>Process.</strong> I mapped the station locations, created 800 m study areas, assigned buildings to stations by geometric centre, classified building use and height, and summarized the results for each station.</p>
+            <p>For building use, each building contributes its full footprint area. Height results are calculated by building count using four ranges: ≤14 m, 14–21 m, 21–70 m and &gt;70 m.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="project-section-simple">
+        <div class="container project-content">
+          <div class="project-heading"><span class="section-bar"></span><h2>Building Use</h2></div>
+          <div class="project-copy-simple">
+            <p>Building use varies substantially along the corridor. Commercial and retail footprints are most prominent around several central stations, including Chinatown and Queen, where they account for 45.9% and 44.3% of total building footprint area.</p>
+            <p>Farther east, the pattern becomes increasingly residential. Residential buildings account for 72.9% of footprint area around Gerrard, 79.5% around Pape and 87.8% around Cosburn.</p>
+            <p>Thorncliffe Park stands out in a different way: 51.0% of its building footprint is classified as Employment/Industrial, the highest share along the corridor.</p>
+          </div>
+        </div>
+        <figure class="project-figure project-figure-wide">
+          <img src="assets/images/ontario-line/building-use.png" alt="Building use within 800 metres of Ontario Line stations">
+          <figcaption>Building use % represent share of total building footprint area. Exhibition should be read cautiously because 67.8% of its building footprint remains unclassified.</figcaption>
+        </figure>
+      </section>
+
+      <section class="project-section-simple">
+        <div class="container project-content">
+          <div class="project-heading"><span class="section-bar"></span><h2>Station by Station</h2></div>
+          <div class="project-copy-simple">
+            <p>Viewing every station at the same scale makes the differences easier to see. Central stations contain a more mixed pattern of uses and a greater presence of taller buildings. Gerrard, Pape and Cosburn show a much stronger low-rise residential pattern. Farther northeast, Thorncliffe Park, Flemingdon Park and Don Valley introduce another set of building forms and height profiles.</p>
+            <p>Putting all 15 stations at the same scale made these differences much easier to see.</p>
+          </div>
+        </div>
+        <figure class="project-figure project-figure-wide">
+          <img src="assets/images/ontario-line/station-grid.png" alt="Station by station grids of building height and building use">
+          <figcaption>All station panels use the same 800 m study radius and map scale. Building use and height come from separate datasets and are compared at the station level.</figcaption>
+        </figure>
+      </section>
+
+      <section class="project-section-simple">
+        <div class="container project-content">
+          <div class="project-heading"><span class="section-bar"></span><h2>Building Height</h2></div>
+          <div class="project-copy-simple">
+            <p>Osgoode and Queen stand out from the rest of the corridor. Their median building heights are 28.5 m and 27.2 m, and about one in five buildings around each station is taller than 70 m.</p>
+            <p>The pattern changes sharply farther east. Around Leslieville, Gerrard, Pape and Cosburn, 94.5% to 98.4% of buildings are 14 m or lower, with no buildings above 70 m in the dataset.</p>
+            <p>The northeastern stations are more mixed. Flemingdon Park and Don Valley have relatively low median heights, 8.2 m and 10.1 m, while still containing buildings above 70 m. A small number of towers can therefore sit within an otherwise much lower building-height profile.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="project-section-simple">
+        <div class="container project-content">
+          <div class="project-heading"><span class="section-bar"></span><h2>A Changing Planning Context</h2></div>
+          <div class="project-copy-simple">
+            <p>Toronto is currently updating zoning around major transit stations, while Transit-Oriented Community projects are also being advanced at several Ontario Line stations. While these initiatives look toward future development, my maps look at the built environment already in place around each station.</p>
+            <p>Looking across the corridor, the differences are substantial. The urban environments surrounding Queen and Osgoode are very different from those around Pape or Cosburn, while the stations in the northeast show yet a different built form. For me, that makes the existing conditions worth understanding before thinking about what comes next.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="project-section-simple project-notes-section">
+        <div class="container project-content">
+          <div class="project-heading"><span class="section-bar"></span><h2>Data Notes</h2></div>
+          <div class="project-notes-simple">
+            <p>The 800 m circles are analytical study areas. They provide a consistent spatial frame across all 15 stations and do not represent the City of Toronto’s official MTSA or PMTSA boundaries. Station and route locations are approximate and were referenced from official Ontario Line information.</p>
+            <p>Building use is primarily classified from OpenStreetMap tags, with City of Toronto zoning used where OSM tags were unavailable. Zoning represents permitted use and may not reflect the current use of an individual building. Mixed-use zones also create some classification ambiguity.</p>
+            <p>A building is assigned to a station when its centroid falls within the study area, and its full footprint is counted. Building use and height come from separate datasets and are compared at the station level rather than linked building by building.</p>
+            <p>The OSM building file is dated July 2024, while the 3D Massing dataset was updated in December 2025. This project describes existing building use and height; it does not measure changes caused by transit investment, redevelopment, housing conditions or displacement.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="project-section-simple project-notes-section">
+        <div class="container project-content">
+          <div class="project-heading"><span class="section-bar"></span><h2>Sources</h2></div>
+          <div class="source-list-simple sources-as-copy">
+            <p><a href="https://www.metrolinx.com/en/projects-and-programs/ontario-line/what-were-building" target="_blank" rel="noopener">Metrolinx, Ontario Line: What We’re Building ↗</a></p>
+            <p><a href="https://www.toronto.ca/city-government/planning-development/planning-studies-initiatives/zoning-for-major-transit-station-areas/" target="_blank" rel="noopener">City of Toronto, Zoning for Major Transit Station Areas ↗</a></p>
+            <p><a href="https://www.infrastructureontario.ca/en/what-we-do/development/transit-oriented-communities-subways/" target="_blank" rel="noopener">Infrastructure Ontario, Transit-Oriented Communities ↗</a></p>
+            <p><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors, ODbL ↗</a></p>
+            <p><a href="https://www.toronto.ca/city-government/planning-development/zoning-by-law-preliminary-zoning-reviews/zoning-by-law-569-2013-2/" target="_blank" rel="noopener">City of Toronto, Zoning By-law 569-2013 ↗</a></p>
+            <p><a href="https://open.toronto.ca/" target="_blank" rel="noopener">City of Toronto Open Data, 3D Massing ↗</a></p>
+            <p><a href="https://open.toronto.ca/open-data-licence/" target="_blank" rel="noopener">Open Government Licence, Toronto ↗</a></p>
+          </div>
+        </div>
+      </section>
+
+      <div class="container back-link-wrap">
+        <a class="back-link" href="index.html">← Back to selected work</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-copy">© 2026 LEWEI GAO · TORONTO</p>
+        <p class="footer-copy">ANALYSIS + CARTOGRAPHY BY LEWEI GAO</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
